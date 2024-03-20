@@ -19,6 +19,17 @@ const adminAuthentication = (req,res,next)=>{
   }
 };
 
+const userAuthentication = (req, res, next) => {
+  const { username, password } = req.headers;
+  const user = USERS.find(u => u.username === username && u.password === password);
+  if (user) {
+    req.user = user;  // Add user object to the request
+    next();
+  } else {
+    res.status(403).json({ message: 'User authentication failed' });
+  }
+};
+
 app.post('/admin/signup', (req, res) => {
   // logic to sign up admin
 });
