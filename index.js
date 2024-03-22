@@ -42,12 +42,17 @@ app.post('/admin/signup', (req, res) => {
   }
 });
 
-app.post('/admin/login', (req, res) => {
-  // logic to log in admin
+app.post('/admin/login', adminAuthentication, (req, res) => {
+  res.json({ message:'Logged in Successfully'});
 });
 
 app.post('/admin/courses', (req, res) => {
   // logic to create a course
+  const course = req.body;
+  course.id=Date.now();
+  COURSES.push(course);
+  res.json({ message : 'Course created Successfully', courseId:course.id});
+
 });
 
 app.put('/admin/courses/:courseId', (req, res) => {
