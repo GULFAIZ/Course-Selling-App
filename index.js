@@ -69,11 +69,7 @@ app.put('/admin/courses/:courseId', (req, res) => {
 
 app.get('/admin/courses', (req, res) => {
   // logic to get all courses
-    const course = req.body;
-  course.id=Date.now();
-  COURSES.push(course);
-  res.json({ message : 'Course created Successfully', courseId:course.id});
-
+    res.json({ courses: COURSES });
 });
 
 // User routes
